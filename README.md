@@ -13,3 +13,9 @@ Use docker-compose and Grafana Cloud to build a simple monitoring system.
 
 2. prometheus.yaml
 * 
+
+# Commands
+* Start
+    - docker compose -f docker-compose.yaml up -d
+* Stop
+    - docker compose -f docker-compose.yaml down

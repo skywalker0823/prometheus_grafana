@@ -13,9 +13,9 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 
   # Docker monitoring
-  - job_name: 'cadvisor'
-    static_configs:
-      - targets: ['cadvisor:8080']
+  # - job_name: 'cadvisor'
+  #   static_configs:
+  #     - targets: ['cadvisor:8080']
 
   # # MySQL monitoring
   # - job_name: 'mysql'

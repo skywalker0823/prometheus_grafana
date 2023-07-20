@@ -44,3 +44,29 @@ services:
       - "9090:9090"
     networks:
       - monitoring
+
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - monitoring
+
+  # mysql-exporter:
+  #   image: prom/mysqld-exporter:latest
+  #   container_name: mysql-exporter
+  #   restart: unless-stopped
+  #   environment:
+  #     - DATA_SOURCE_NAME=root:<password>@(127.0.0.1:3306)/
+  #   ports:
+  #     - "9104:9104"
+  #   networks:
+  #     - monitoring
+  

@@ -7,14 +7,20 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
+  # Basic system metrics
   - job_name: 'node'
     static_configs:
       - targets: ['node-exporter:9100']
-  #Docker monitoring
+
+  # Docker monitoring
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
 
+  # # MySQL monitoring
+  # - job_name: 'mysql'
+  #   static_configs:
+  #     - targets: ['mysql-exporter:9104']
 
 # remote_write:
 #   - url: '<Your Prometheus remote_write endpoint>'

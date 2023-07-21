@@ -45,18 +45,18 @@ services:
     networks:
       - monitoring
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    restart: always
-    # volumes:
-    #   - grafana_data:/var/lib/grafana
-    # environment:
-    #   - GF_SECURITY_ADMIN_PASSWORD=<password>
-    ports:
-      - "3000:3000"
-    networks:
-      - monitoring
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: grafana
+  #   restart: always
+  #   # volumes:
+  #   #   - grafana_data:/var/lib/grafana
+  #   # environment:
+  #   #   - GF_SECURITY_ADMIN_PASSWORD=<password>
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - monitoring
 
   cadvisor:
     image: google/cadvisor:latest

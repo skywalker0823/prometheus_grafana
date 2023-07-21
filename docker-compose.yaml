@@ -41,7 +41,7 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
     ports:
-      - "9091:9090"
+      - "9090:9090"
     networks:
       - monitoring
 

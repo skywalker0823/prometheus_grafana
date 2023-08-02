@@ -2,21 +2,22 @@ global:
   scrape_interval: 1m
 
 scrape_configs:
+  # Prometheus itself
   - job_name: 'prometheus'
     static_configs:
       - targets: [prometheus:9090]
 
-  # Basic system metrics
+  # For Basic system metrics gathering
   - job_name: 'node'
     static_configs:
       - targets: ['node-exporter:9100']
 
-  # Docker monitoring
+  # For Docker monitoring
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
 
-  # MySQL monitoring
+  # For MySQL monitoring
   - job_name: 'mysql'
     static_configs:
       - targets: ['mysql-exporter:9104']
@@ -26,3 +27,15 @@ scrape_configs:
 #     basic_auth:
 #       username: ''
 #       password: ''
+
+  - job_name: 'alertmanager'
+    static_configs:
+      - targets: ['alertmanager:9093']
+
+rule_files:
+  - 'rules.yaml'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']

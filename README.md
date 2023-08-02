@@ -19,3 +19,12 @@ Use docker-compose and Grafana Cloud to build a simple monitoring system.
     - docker compose -f docker-compose.yaml up -d
 * Stop
     - docker compose -f docker-compose.yaml down
+
+# Alert
+1. Create alerting rule for prometheus(what condition will trigger alert, such as instance down)
+2. Set up alertmanager to receive alert from prometheus, and able to variety of things.
+* grouping alerts of similar nature into a single notification
+* silencing alerts for a specific time
+* muting notifications for certain alerts if other specified alerts are already firing
+* picking which receivers receive a particular alert
+3. 

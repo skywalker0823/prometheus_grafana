@@ -1,0 +1,35 @@
+groups:
+  - name: AllInstances
+    rules:
+    - alert: InstanceDown
+      # Condition for alerting
+      expr: up == 0
+      for: 1m
+      # Annotation - additional informational labels to store more information
+      annotations:
+        title: 'Instance {{ $labels.instance }} down'
+        description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute.'
+      # Labels - additional labels to be attached to the alert
+      labels:
+        severity: 'critical'
+  - name: RAMUsage
+    rules:
+    - alert: RAMUsage
+      expr: (node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes) / node_memory_MemTotal_bytes * 100 > 30
+      for: 1m
+      annotations:
+        title: 'RAM usage is high'
+        description: 'RAM usage is above 30% (current value is: {{ $value }}%)'
+      labels:
+        severity: 'warning'
+  - name: CPUUsage
+    rules:
+    - alert: CPUUsage
+      expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+      for: 3m
+      annotations:
+        title: 'CPU usage is high'
+        description: 'CPU usage is above 80% (current value is: {{ $value }}%)'
+      labels:
+        severity: 'warning'
+

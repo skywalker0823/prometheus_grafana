@@ -59,9 +59,9 @@ services:
     container_name: blackbox-exporter
     restart: unless-stopped
     volumes:
-      - ./blackbox-exporter/config.yml:/config.yml
+      - ./prometheus.yaml:/config.yaml
     command:
-      - '--config.file=/config.yml'
+      - '--config.file=/config.yaml'
     ports:
       - "9115:9115"
     networks:

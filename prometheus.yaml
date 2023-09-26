@@ -17,10 +17,27 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
-  # For MySQL monitoring
-  - job_name: 'mysql'
+  # For blackbox monitoring
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx] # Look for a HTTP 200 response.
     static_configs:
-      - targets: ['mysql-exporter:9104']
+      - targets:
+        - https://motivetag.com
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115 # The blackbox exporter's real hostname:port.
+    
+
+  # For MySQL monitoring
+  # - job_name: 'mysql'
+  #   static_configs:
+  #     - targets: ['mysql-exporter:9104']
 
 # remote_write:
 #   - url: '<Your Prometheus remote_write endpoint>'
@@ -28,14 +45,14 @@ scrape_configs:
 #       username: ''
 #       password: ''
 
-  - job_name: 'alertmanager'
-    static_configs:
-      - targets: ['alertmanager:9093']
+  # - job_name: 'alertmanager'
+  #   static_configs:
+  #     - targets: ['alertmanager:9093']
 
-rule_files:
-  - 'rules.yaml'
+# rule_files:
+#   - 'rules.yaml'
 
-alerting:
-  alertmanagers:
-    - static_configs:
-        - targets: ['alertmanager:9093']
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets: ['alertmanager:9093']

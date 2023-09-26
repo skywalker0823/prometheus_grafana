@@ -45,19 +45,19 @@ services:
     networks:
       - monitoring
 
-  alertmanager:
-    image: prom/alertmanager:latest
-    container_name: alertmanager
-    restart: unless-stopped
-    volumes:
-      - ./alertmanager/alertmanager.yaml:/etc/alertmanager/alertmanager.yaml
-    command:
-      - '--config.file=/etc/alertmanager/alertmanager.yaml'
-      - '--storage.path=/alertmanager'
-    ports:
-      - "9093:9093"
-    networks:
-      - monitoring
+  # alertmanager:
+  #   image: prom/alertmanager:latest
+  #   container_name: alertmanager
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./alertmanager/alertmanager.yaml:/etc/alertmanager/alertmanager.yaml
+  #   command:
+  #     - '--config.file=/etc/alertmanager/alertmanager.yaml'
+  #     - '--storage.path=/alertmanager'
+  #   ports:
+  #     - "9093:9093"
+  #   networks:
+  #     - monitoring
     
   grafana:
     image: grafana/grafana:latest

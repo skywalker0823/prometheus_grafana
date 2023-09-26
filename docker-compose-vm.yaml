@@ -59,10 +59,23 @@ services:
     container_name: blackbox-exporter
     restart: unless-stopped
     volumes:
-      - ./prometheus.yaml:/config.yaml
+      - ./blackbox/blackbox.yaml:/config.yaml
     command:
       - '--config.file=/config.yaml'
     ports:
       - "9115:9115"
+    networks:
+      - monitoring
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    restart: unless-stopped
+    volumes:
+      - ./alertmanager/alertmanager.yaml:/etc/alertmanager/alertmanager.yaml
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yaml'
+      - '--storage.path=/alertmanager'
+    ports:
+      - "9093:9093"
     networks:
       - monitoring
